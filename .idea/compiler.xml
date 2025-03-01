@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
       </profile>
-      <profile name="Annotation profile for servicio-eventos" enabled="true">
+      <profile name="Annotation profile for servicio-eventos-infrastructure" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -15,8 +15,16 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
-        <module name="servicio-eventos-application" />
         <module name="servicio-eventos-infrastructure" />
+      </profile>
+      <profile name="Annotation profile for servicio-eventos" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="servicio-eventos-application" />
         <module name="servicio-eventos-domain" />
       </profile>
     </annotationProcessing>

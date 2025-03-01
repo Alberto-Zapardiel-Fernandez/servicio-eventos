@@ -15,6 +15,9 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <openapi.version>0.2.6</openapi.version>
+    <openapi.generator.version>7.8.0</openapi.generator.version>
+    <swagger.version>2.2.28</swagger.version>
   </properties>
   <dependencies>
     <dependency>
@@ -34,12 +37,17 @@
     <dependency>
       <groupId>io.swagger.core.v3</groupId>
       <artifactId>swagger-annotations</artifactId>
-      <version>2.2.20</version>
+      <version>${swagger.version}</version>
     </dependency>
     <dependency>
       <groupId>org.openapitools</groupId>
       <artifactId>jackson-databind-nullable</artifactId>
-      <version>0.2.6</version>
+      <version>${openapi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.8.0</version>
     </dependency>
   </dependencies>
 
@@ -48,20 +56,40 @@
       <plugin>
         <groupId>org.openapitools</groupId>
         <artifactId>openapi-generator-maven-plugin</artifactId>
-        <version>7.2.0</version>
+        <version>${openapi.generator.version}</version>
         <executions>
           <execution>
+            <id>generate-openapi-specification</id>
             <goals>
               <goal>generate</goal>
             </goals>
             <configuration>
-              <inputSpec>${project.basedir}/src/main/resources/api_first/openapi.yml</inputSpec>
               <generatorName>spring</generatorName>
-              <apiPackage>com.eventos.servicioeventos.api</apiPackage>
-              <modelPackage>com.eventos.servicioeventos.dto</modelPackage>
+              <inputSpec>${project.basedir}/src/main/resources/api_first/openapi.yml</inputSpec>
+              <apiNameSuffix>API</apiNameSuffix>
+              <modelNameSuffix>DTO</modelNameSuffix>
+              <generateApiTests>false</generateApiTests>
+              <generateModelTests>true</generateModelTests>
+              <modelPackage>com.eventos.rest.dto</modelPackage>
+              <apiPackage>com.eventos.rest.api</apiPackage>
               <configOptions>
-                <delegatePattern>true</delegatePattern>
+                <operationIdNamingConvention>camelCase</operationIdNamingConvention>
+                <sourceFolder>src/main/java</sourceFolder>
+                <configPackage>com.eventos.config</configPackage>
+                <java8>true</java8>
+                <dateLibrary>java8</dateLibrary>
+                <useOptional>true</useOptional>
+                <useBeanValidation>true</useBeanValidation>
+                <useTags>true</useTags>
                 <useSpringBoot3>true</useSpringBoot3>
+                <useJakartaEe>true</useJakartaEe>
+                <interfaceOnly>true</interfaceOnly>
+                <skipDefaultInterface>true</skipDefaultInterface>
+                <requestMappingMode>api_interface</requestMappingMode>
+                <delegatePattern>true</delegatePattern>
+                <openApiNullable>false</openApiNullable>
+                <!--suppress UnresolvedMavenProperty -->
+                <additionalModelTypeAnnotations>@lombok.Builder @lombok.Data @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
               </configOptions>
             </configuration>
           </execution>
