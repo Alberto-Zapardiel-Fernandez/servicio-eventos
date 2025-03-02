@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.eventos</groupId>
@@ -16,8 +14,8 @@
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <openapi.version>0.2.6</openapi.version>
-    <openapi.generator.version>7.8.0</openapi.generator.version>
-    <swagger.version>2.2.28</swagger.version>
+    <openapi.generator.version>7.3.0</openapi.generator.version>
+    <swagger.version>2.2.20</swagger.version>
   </properties>
   <dependencies>
     <dependency>
@@ -26,9 +24,8 @@
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.3.0</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -45,14 +42,28 @@
       <version>${openapi.version}</version>
     </dependency>
     <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-      <version>1.8.0</version>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.2.0</version>
     </dependency>
   </dependencies>
-
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.openapitools</groupId>
         <artifactId>openapi-generator-maven-plugin</artifactId>
@@ -72,6 +83,7 @@
               <generateModelTests>true</generateModelTests>
               <modelPackage>com.eventos.rest.dto</modelPackage>
               <apiPackage>com.eventos.rest.api</apiPackage>
+              <skipValidateSpec>true</skipValidateSpec>
               <configOptions>
                 <operationIdNamingConvention>camelCase</operationIdNamingConvention>
                 <sourceFolder>src/main/java</sourceFolder>
@@ -90,6 +102,12 @@
                 <openApiNullable>false</openApiNullable>
                 <!--suppress UnresolvedMavenProperty -->
                 <additionalModelTypeAnnotations>@lombok.Builder @lombok.Data @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
+                <nameMappings>
+                  <nameMapping>_type=underscoreType</nameMapping>
+                  <nameMapping>type_=typeWithUnderscore</nameMapping>
+                </nameMappings>
+                <parameterNameMapping>_type=paramType</parameterNameMapping>
+                <parameterNameMapping>type_=typeParam</parameterNameMapping>
               </configOptions>
             </configuration>
           </execution>
@@ -97,5 +115,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>

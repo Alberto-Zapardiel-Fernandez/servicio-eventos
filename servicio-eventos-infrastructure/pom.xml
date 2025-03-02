@@ -33,11 +33,6 @@
       <artifactId>servicio-eventos-domain</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>com.eventos</groupId>
-      <artifactId>servicio-eventos-application</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
   </dependencies>
 
 </project>
