@@ -21,4 +21,17 @@ public class EventController implements EventAPI {
     public ResponseEntity<List<EventDTO>> _getEventList() {
         return null;
     }
+
+    /**
+     * POST /event : Crea un nuevo evento.
+     *
+     * @param body (required)
+     * @return (status code 200)
+     * or Solicitud incorrecta. (status code 400)
+     * or Error interno del servidor. (status code 500)
+     */
+    @Override
+    public ResponseEntity<Void> _insertEvent(EventDTO body) {
+        return null;
+    }
 }

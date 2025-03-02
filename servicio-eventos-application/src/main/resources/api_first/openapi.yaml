@@ -21,6 +21,20 @@ paths:
           description: Solicitud incorrecta.
         "500":
           description: Error interno del servidor.
+    post:
+      tags:
+        - Event
+      operationId: insertEvent
+      summary: Crea un nuevo evento.
+      requestBody:
+        $ref: '#/components/requestBodies/EventRequest'
+      responses:
+        "200":
+          $ref: "#/components/schemas/Event"
+        "400":
+          description: Solicitud incorrecta.
+        "500":
+          description: Error interno del servidor.
 components:
   schemas:
     Event:
@@ -48,6 +62,13 @@ components:
         capacity:
           type: integer
           example: 100
+  requestBodies:
+    EventRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Event'
   responses:
     EventListResponse:
       description: Respuesta de la lista de eventos.
