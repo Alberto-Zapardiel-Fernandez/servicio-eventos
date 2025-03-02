@@ -29,8 +29,12 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/EventRequest'
       responses:
-        "200":
-          $ref: "#/components/schemas/Event"
+        "201":  # Cambiado a 201 Created
+          description: Evento creado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
         "400":
           description: Solicitud incorrecta.
         "500":
@@ -53,6 +57,10 @@ components:
           type: string
           format: date
           example: 2023-12-01
+        time:
+          type: string
+          format: time
+          example: 12:00:00
         location:
           type: string
           example: Ubicación 1

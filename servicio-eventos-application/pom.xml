@@ -17,6 +17,8 @@
     <openapi.version>0.2.6</openapi.version>
     <openapi.generator.version>7.3.0</openapi.generator.version>
     <swagger.version>2.2.20</swagger.version>
+    <lombok.version>1.18.30</lombok.version>
+    <mapstruct.version>1.6.3</mapstruct.version>
   </properties>
   <dependencies>
     <dependency>
@@ -51,6 +53,17 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>${mapstruct.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-processor</artifactId>
+      <version>${mapstruct.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
