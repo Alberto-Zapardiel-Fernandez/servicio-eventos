@@ -3,6 +3,7 @@ package com.eventos.rest;
 import com.eventos.rest.api.EventAPI;
 import com.eventos.rest.dto.EventDTO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
