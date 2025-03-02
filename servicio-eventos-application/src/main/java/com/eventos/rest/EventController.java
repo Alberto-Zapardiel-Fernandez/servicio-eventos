@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 public class EventController implements EventAPI {
+
     /**
      * GET /event : Obtiene la lista de eventos.
      *

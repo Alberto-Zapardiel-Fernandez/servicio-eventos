@@ -76,7 +76,7 @@
             </goals>
             <configuration>
               <generatorName>spring</generatorName>
-              <inputSpec>${project.basedir}/src/main/resources/api_first/openapi.yml</inputSpec>
+              <inputSpec>${project.basedir}/src/main/resources/api_first/openapi.yaml</inputSpec>
               <apiNameSuffix>API</apiNameSuffix>
               <modelNameSuffix>DTO</modelNameSuffix>
               <generateApiTests>false</generateApiTests>
@@ -85,7 +85,7 @@
               <apiPackage>com.eventos.rest.api</apiPackage>
               <skipValidateSpec>true</skipValidateSpec>
               <configOptions>
-                <operationIdNamingConvention>camelCase</operationIdNamingConvention>
+                <operationIdNamingConvention>without-underscore</operationIdNamingConvention>
                 <sourceFolder>src/main/java</sourceFolder>
                 <configPackage>com.eventos.config</configPackage>
                 <java8>true</java8>
