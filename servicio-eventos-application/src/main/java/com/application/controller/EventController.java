@@ -43,6 +43,34 @@ public class EventController implements EventApi {
     private final EventMapper eventMapper;
 
     /**
+     * DELETE /event : Delete un nuevo evento.
+     *
+     * @param id (required)
+     * @return Evento creado exitosamente. (status code 200)
+     * or Solicitud incorrecta. (status code 400)
+     * or Error interno del servidor. (status code 500)
+     */
+    @Override
+    public ResponseEntity<Void> deleteEvent(Long id) {
+        eventService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * GET /event/{id} : Obtiene un evento.
+     *
+     * @param id (required)
+     * @return (status code 200)
+     * or Solicitud incorrecta. (status code 400)
+     * or Error interno del servidor. (status code 500)
+     */
+    @Override
+    public ResponseEntity<EventDTO> getEvent(Long id) {
+        EventDTO eventDTO = eventMapper.eventModelToEventDTO(eventService.getEventById(id).orElse(null));
+        return new ResponseEntity<>(eventDTO, HttpStatus.OK);
+    }
+
+    /**
      * Get all the events
      *
      * @return the list of events
@@ -64,6 +92,20 @@ public class EventController implements EventApi {
         EventModel createdEvent = eventService.createEvent(eventMapper.eventDTOToEventModel(eventDTO));
         EventDTO createdEventDTO = eventMapper.eventModelToEventDTO(createdEvent);
         return new ResponseEntity<>(createdEventDTO, HttpStatus.CREATED);
+    }
+
+    /**
+     * PUT /event : Update un nuevo evento.
+     *
+     * @param eventDTO (required)
+     * @return Evento creado exitosamente. (status code 201)
+     * or Solicitud incorrecta. (status code 400)
+     * or Error interno del servidor. (status code 500)
+     */
+    @Override
+    public ResponseEntity<EventDTO> updateEvent(EventDTO eventDTO) {
+        EventDTO updatedEventDTO = eventMapper.eventModelToEventDTO(eventService.createEvent(eventMapper.eventDTOToEventModel(eventDTO)));
+        return new ResponseEntity<>(updatedEventDTO, HttpStatus.CREATED);
     }
 
 }

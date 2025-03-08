@@ -8,6 +8,21 @@ tags:
 servers:
   - url: "/v1"
 paths:
+  "/event/{id}":
+    get:
+      tags:
+        - Event
+      summary: Obtiene un evento.
+      operationId: getEvent
+      parameters:
+        - $ref: '#/components/parameters/Event-Id'
+      responses:
+        "200":
+          $ref: "#/components/responses/EventResponse"
+        "400":
+          description: Solicitud incorrecta.
+        "500":
+          description: Error interno del servidor.
   "/event":
     get:
       tags:
@@ -39,7 +54,56 @@ paths:
           description: Solicitud incorrecta.
         "500":
           description: Error interno del servidor.
+    put:
+      tags:
+        - Event
+      operationId: updateEvent
+      summary: Update un nuevo evento.
+      requestBody:
+        $ref: '#/components/requestBodies/EventRequest'
+      responses:
+        "201":  # Cambiado a 201 Updated
+          description: Evento creado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "400":
+          description: Solicitud incorrecta.
+        "500":
+          description: Error interno del servidor.
+    delete:
+      tags:
+        - Event
+      operationId: deleteEvent
+      summary: Delete un nuevo evento.
+      parameters:
+        - $ref: '#/components/parameters/EventId'
+      responses:
+        "204":  # Borrado exitoso
+          description: Evento borrado exitosamente.
+        "400":
+          description: Solicitud incorrecta.
+        "500":
+          description: Error interno del servidor.
 components:
+  parameters:
+    Event-Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    EventId:
+      name: id
+      in: query
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
   schemas:
     Event:
       type: object
@@ -78,6 +142,12 @@ components:
           schema:
             $ref: '#/components/schemas/Event'
   responses:
+    EventResponse:
+      description: Respuesta de un evento.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Event"
     EventListResponse:
       description: Respuesta de la lista de eventos.
       content:
