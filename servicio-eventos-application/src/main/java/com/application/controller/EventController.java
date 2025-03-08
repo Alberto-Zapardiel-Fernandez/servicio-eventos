@@ -4,28 +4,24 @@ import com.application.controller.api.EventApi;
 import com.application.controller.dto.EventDTO;
 import com.application.ports.in.EventService;
 import com.domain.models.EventModel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
+@RequiredArgsConstructor
 public class EventController implements EventApi {
 
     private final EventService eventService;
-
-    public EventController(EventService eventService) {
-        this.eventService = eventService;
-    }
 
     @Override
     public ResponseEntity<List<EventDTO>> getEventList() {
         List<EventModel> events = eventService.getAllEvents();
         List<EventDTO> eventDTOs = events.stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
+                .map(this::mapToDTO).toList();
         return new ResponseEntity<>(eventDTOs, HttpStatus.OK);
     }
 
@@ -39,7 +35,6 @@ public class EventController implements EventApi {
 
     private EventDTO mapToDTO(EventModel eventModel) {
         EventDTO eventDTO = new EventDTO();
-        eventDTO.setId(eventModel.getId().intValue()); // Convierte Long a Integer
         eventDTO.setName(eventModel.getName());
         eventDTO.setDescription(eventModel.getDescription());
         eventDTO.setDate(LocalDate.parse(eventModel.getDate())); // Convierte String a LocalDate
@@ -52,7 +47,6 @@ public class EventController implements EventApi {
 
     private EventModel mapToModel(EventDTO eventDTO) {
         EventModel eventModel = new EventModel();
-        eventModel.setId(eventDTO.getId().longValue()); // Convierte Integer a Long
         eventModel.setName(eventDTO.getName());
         eventModel.setDescription(eventDTO.getDescription());
         eventModel.setDate(eventDTO.getDate().toString()); // Convierte LocalDate a String
