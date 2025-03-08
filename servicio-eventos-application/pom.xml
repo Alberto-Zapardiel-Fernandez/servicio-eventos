@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.gestion.eventos</groupId>
+    <artifactId>servicio-eventos</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>servicio-eventos-application</artifactId>
+
+  <properties>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <swagger-annotations.version>2.2.15</swagger-annotations.version>
+    <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+    <openapi-generator-maven-plugin.version>6.4.0</openapi-generator-maven-plugin.version>
+    <api-first-package>com.application.rest</api-first-package>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.gestion.eventos</groupId>
+      <artifactId>servicio-eventos-domain</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.gestion.eventos</groupId>
+      <artifactId>servicio-eventos-infrastructure</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>${swagger-annotations.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>${jackson-databind-nullable.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>${openapi-generator-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <generatorName>spring</generatorName>
+              <inputSpec>${project.basedir}/src/main/resources/api-first/openapi.yaml</inputSpec>
+              <apiNameSuffix>API</apiNameSuffix>
+              <modelNameSuffix>DTO</modelNameSuffix>
+              <generateApiTests>false</generateApiTests>
+              <generateModelTests>true</generateModelTests>
+              <apiPackage>${api-first-package}.api</apiPackage>
+              <modelPackage>${api-first-package}.dto</modelPackage>
+              <!--<skipValidateSpec>true</skipValidateSpec> Si contiene errores menores se utiliza para saltarlos-->
+              <configOptions>
+                <delegatePattern>true</delegatePattern>
+                <interfaceOnly>true</interfaceOnly>
+                <useTags>true</useTags>
+                <useSpringBoot3>true</useSpringBoot3>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

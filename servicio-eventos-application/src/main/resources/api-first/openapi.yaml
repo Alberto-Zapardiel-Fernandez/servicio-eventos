@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  title: Servicio de Eventos API
+  version: 1.0.0
+tags:
+  - name: Event
+    description: Operaciones relacionadas con eventos.
+servers:
+  - url: "/v1"
+paths:
+  "/event":
+    get:
+      tags:
+        - Event
+      summary: Obtiene la lista de eventos.
+      operationId: getEventList
+      responses:
+        "200":
+          $ref: "#/components/responses/EventListResponse"
+        "400":
+          description: Solicitud incorrecta.
+        "500":
+          description: Error interno del servidor.
+    post:
+      tags:
+        - Event
+      operationId: insertEvent
+      summary: Crea un nuevo evento.
+      requestBody:
+        $ref: '#/components/requestBodies/EventRequest'
+      responses:
+        "201":  # Cambiado a 201 Created
+          description: Evento creado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "400":
+          description: Solicitud incorrecta.
+        "500":
+          description: Error interno del servidor.
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Evento 1
+        description:
+          type: string
+          example: Descripción del evento 1
+        date:
+          type: string
+          format: date
+          example: 2023-12-01
+        time:
+          type: string
+          format: time
+          example: 12:00:00
+        location:
+          type: string
+          example: Ubicación 1
+        category:
+          type: string
+          example: Categoría 1
+        capacity:
+          type: integer
+          example: 100
+  requestBodies:
+    EventRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Event'
+  responses:
+    EventListResponse:
+      description: Respuesta de la lista de eventos.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Event"
