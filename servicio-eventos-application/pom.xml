@@ -18,7 +18,7 @@
     <swagger-annotations.version>2.2.15</swagger-annotations.version>
     <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
     <openapi-generator-maven-plugin.version>6.4.0</openapi-generator-maven-plugin.version>
-    <api-first-package>com.application.rest</api-first-package>
+    <api-first-package>com.application.controller</api-first-package>
   </properties>
   <dependencies>
     <dependency>
@@ -63,12 +63,15 @@
               <generateModelTests>true</generateModelTests>
               <apiPackage>${api-first-package}.api</apiPackage>
               <modelPackage>${api-first-package}.dto</modelPackage>
-              <!--<skipValidateSpec>true</skipValidateSpec> Si contiene errores menores se utiliza para saltarlos-->
               <configOptions>
-                <delegatePattern>true</delegatePattern>
+                <delegatePattern>false</delegatePattern>
                 <interfaceOnly>true</interfaceOnly>
                 <useTags>true</useTags>
                 <useSpringBoot3>true</useSpringBoot3>
+                <useOptional>true</useOptional>
+                <useJakartaEe>true</useJakartaEe>
+                <interfaceOnly>true</interfaceOnly>
+                <skipDefaultInterface>true</skipDefaultInterface>
               </configOptions>
             </configuration>
           </execution>
