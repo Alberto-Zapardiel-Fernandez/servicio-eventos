@@ -98,6 +98,10 @@
       <version>${jjwt-api.version}</version>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-crypto</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
