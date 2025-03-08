@@ -2,7 +2,7 @@ jwt:
   secret: njxgfNABEZr5BrU29vFmjfHXemZngUXZVxWOZ/N00PE=
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/eventos
+    url: jdbc:mysql://localhost:3306/eventos?characterEncoding=UTF-8
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
