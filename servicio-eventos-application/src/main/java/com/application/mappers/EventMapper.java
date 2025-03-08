@@ -39,14 +39,4 @@ public interface EventMapper {
     default List<EventDTO> eventModelListToEventDTOList(List<EventModel> events){
         return events.stream().map(this::eventModelToEventDTO).toList();
     }
-
-    /**
-     * List of EventDTO to List of EventModel
-     *
-     * @param events the list of EventDTO
-     * @return the list of EventModel
-     */
-    default List<EventModel> eventDTOListToEventModelList(List<EventDTO> events) {
-        return events.stream().map(this::eventDTOToEventModel).toList();
-    }
 }
