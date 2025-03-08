@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.application", "com.infrastructure"})
 @EnableJpaRepositories(basePackages = "com.infrastructure.repository")
-@EntityScan(basePackages = "com.infrastructure.entity")
+@EntityScan(basePackages = "com.infrastructure.entities")
 public class Main {
 
     public static void main(String[] args) {

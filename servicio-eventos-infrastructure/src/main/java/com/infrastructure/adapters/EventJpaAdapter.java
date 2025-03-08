@@ -2,7 +2,7 @@ package com.infrastructure.adapters;
 
 import com.domain.models.EventModel;
 import com.domain.ports.out.EventRepositoryPort;
-import com.infrastructure.entity.Event;
+import com.infrastructure.entities.Event;
 import com.infrastructure.mappers.EventEntityMapper;
 import com.infrastructure.repository.EventRepository;
 import lombok.RequiredArgsConstructor;

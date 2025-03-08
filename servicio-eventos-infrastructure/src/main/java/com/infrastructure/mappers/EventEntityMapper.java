@@ -1,7 +1,7 @@
 package com.infrastructure.mappers;
 
 import com.domain.models.EventModel;
-import com.infrastructure.entity.Event;
+import com.infrastructure.entities.Event;
 import org.mapstruct.Mapper;
 
 import java.util.List;
